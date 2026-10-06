@@ -1,0 +1,12 @@
+{
+  "final_macro_f1": 0.9729328646581819,
+  "final_demag_recall": 0.9550969851352876,
+  "d_to_n_51": 704,
+  "d_to_n_87": 433,
+  "d_to_n_reduction": 0.3849431818181818,
+  "bidirectional_51": 1462,
+  "bidirectional_87": 1060,
+  "bidirectional_reduction": 0.2749658002735978,
+  "total_chunks": 46660,
+  "total_sessions": 1176
+}

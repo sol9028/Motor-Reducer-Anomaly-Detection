@@ -1,0 +1,20 @@
+# 라즈베리파이4 (64비트 Raspberry Pi OS Bookworm, Python 3.11) 벤치마크용
+#
+# !! 버전은 "모델을 학습한 PC" 기준이다. 이 저장소의 .venv 기준이 아니다.
+#
+# joblib 는 pickle 이라 클래스 경로가 바뀌면 로드 자체가 실패한다.
+# 이 저장소 .venv(sktime 0.26.1) 로는 본격/모델/*.joblib 가 전부 이렇게 죽는다:
+#     ModuleNotFoundError: No module named 'sktime.transformations.rocket'
+#   sktime 0.26 : sktime.transformations.panel.rocket
+#   sktime 1.1  : sktime.transformations.rocket        <- 학습 PC
+#
+# 학습 PC 확인값 (2026-08-23):
+scikit-learn==1.7.2
+numpy==1.26.4
+sktime==1.1.0
+numba==0.62.1
+
+# 아래 둘은 MiniRocket 추론 경로에 직접 관여하지 않아 정확히 맞출 필요는 없다.
+# (bench_latency.py 는 ndarray 를 그대로 넘기므로 pandas 를 타지 않는다)
+joblib
+pandas

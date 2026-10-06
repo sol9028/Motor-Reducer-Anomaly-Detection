@@ -1,0 +1,359 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED18"
+    ],
+    "n_chunks": 14898,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 504,
+    "n_sessions_per_class": {
+      "DEMAG": 54,
+      "ECC10": 84,
+      "ECC20": 152,
+      "NORMAL": 52,
+      "REDUC": 162
+    },
+    "rpm_only_macro_f1": 0.208,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        2084,
+        6319
+      ],
+      "ECC10": [
+        2997,
+        6207
+      ],
+      "ECC20": [
+        2786,
+        5971
+      ],
+      "NORMAL": [
+        2036,
+        6383
+      ],
+      "REDUC": [
+        1857,
+        4194
+      ]
+    },
+    "temp_only_macro_f1": 0.213,
+    "temp_range_by_class": {
+      "DEMAG": [
+        44,
+        56
+      ],
+      "ECC10": [
+        38,
+        66
+      ],
+      "ECC20": [
+        44,
+        68
+      ],
+      "NORMAL": [
+        42,
+        58
+      ],
+      "REDUC": [
+        28,
+        66
+      ]
+    },
+    "min_groups_per_class": 52,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.883189732534731,
+    "macro_f1_std": 0.005332508557580308,
+    "acc_mean": 0.8779117581201206,
+    "acc_std": 0.0005768006707417796,
+    "confusion_matrix": [
+      [
+        2563,
+        13,
+        1,
+        629,
+        4
+      ],
+      [
+        19,
+        2389,
+        149,
+        41,
+        14
+      ],
+      [
+        6,
+        206,
+        2586,
+        3,
+        6
+      ],
+      [
+        686,
+        17,
+        4,
+        2598,
+        8
+      ],
+      [
+        4,
+        0,
+        2,
+        7,
+        2943
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED18"
+    ],
+    "n_chunks": 14966,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 287,
+    "n_sessions_per_class": {
+      "DEMAG": 57,
+      "ECC10": 52,
+      "ECC20": 58,
+      "NORMAL": 48,
+      "REDUC": 72
+    },
+    "rpm_only_macro_f1": 0.214,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1940,
+        6899
+      ],
+      "ECC10": [
+        3165,
+        6792
+      ],
+      "ECC20": [
+        3094,
+        6693
+      ],
+      "NORMAL": [
+        1887,
+        6549
+      ],
+      "REDUC": [
+        1967,
+        5151
+      ]
+    },
+    "temp_only_macro_f1": 0.279,
+    "temp_range_by_class": {
+      "DEMAG": [
+        42,
+        60
+      ],
+      "ECC10": [
+        38,
+        56
+      ],
+      "ECC20": [
+        38,
+        62
+      ],
+      "NORMAL": [
+        42,
+        56
+      ],
+      "REDUC": [
+        28,
+        52
+      ]
+    },
+    "min_groups_per_class": 48,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8666989013597405,
+    "macro_f1_std": 0.007983590835860883,
+    "acc_mean": 0.8626870788950914,
+    "acc_std": 0.014775380363966152,
+    "confusion_matrix": [
+      [
+        2402,
+        11,
+        26,
+        808,
+        3
+      ],
+      [
+        5,
+        2562,
+        154,
+        12,
+        17
+      ],
+      [
+        9,
+        122,
+        2615,
+        5,
+        4
+      ],
+      [
+        840,
+        6,
+        11,
+        2240,
+        3
+      ],
+      [
+        1,
+        23,
+        1,
+        5,
+        3081
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED18"
+    ],
+    "n_chunks": 16796,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 385,
+    "n_sessions_per_class": {
+      "DEMAG": 125,
+      "ECC10": 58,
+      "ECC20": 58,
+      "NORMAL": 57,
+      "REDUC": 87
+    },
+    "rpm_only_macro_f1": 0.238,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1788,
+        5985
+      ],
+      "ECC10": [
+        3178,
+        6878
+      ],
+      "ECC20": [
+        3044,
+        6585
+      ],
+      "NORMAL": [
+        1794,
+        6494
+      ],
+      "REDUC": [
+        1956,
+        5226
+      ]
+    },
+    "temp_only_macro_f1": 0.267,
+    "temp_range_by_class": {
+      "DEMAG": [
+        38,
+        54
+      ],
+      "ECC10": [
+        38,
+        64
+      ],
+      "ECC20": [
+        34,
+        54
+      ],
+      "NORMAL": [
+        36,
+        56
+      ],
+      "REDUC": [
+        22,
+        52
+      ]
+    },
+    "min_groups_per_class": 57,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8690822385462568,
+    "macro_f1_std": 0.0022931961326196574,
+    "acc_mean": 0.8686672202707717,
+    "acc_std": 0.0072488360734577146,
+    "confusion_matrix": [
+      [
+        2617,
+        11,
+        5,
+        783,
+        0
+      ],
+      [
+        13,
+        3763,
+        166,
+        16,
+        3
+      ],
+      [
+        13,
+        223,
+        2820,
+        7,
+        2
+      ],
+      [
+        914,
+        14,
+        13,
+        2303,
+        5
+      ],
+      [
+        2,
+        7,
+        0,
+        5,
+        3091
+      ]
+    ]
+  }
+]

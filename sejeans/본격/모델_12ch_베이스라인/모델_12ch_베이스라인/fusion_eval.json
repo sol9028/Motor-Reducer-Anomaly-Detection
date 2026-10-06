@@ -1,0 +1,197 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSION12"
+    ],
+    "n_chunks": 20000,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "group_col": "timestamp",
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8959674163389214,
+    "macro_f1_std": 0.005629702859584551,
+    "acc_mean": 0.8961463593505558,
+    "acc_std": 0.008598238897597048,
+    "confusion_matrix": [
+      [
+        3278,
+        7,
+        1,
+        710,
+        4
+      ],
+      [
+        14,
+        3686,
+        262,
+        28,
+        10
+      ],
+      [
+        3,
+        238,
+        3753,
+        5,
+        1
+      ],
+      [
+        742,
+        24,
+        5,
+        3218,
+        11
+      ],
+      [
+        4,
+        0,
+        3,
+        12,
+        3981
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSION12"
+    ],
+    "n_chunks": 20000,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "group_col": "timestamp",
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.884488721942656,
+    "macro_f1_std": 0.01186257754364402,
+    "acc_mean": 0.8914093273124469,
+    "acc_std": 0.019981694926637535,
+    "confusion_matrix": [
+      [
+        3208,
+        10,
+        11,
+        770,
+        1
+      ],
+      [
+        15,
+        3679,
+        277,
+        18,
+        11
+      ],
+      [
+        5,
+        216,
+        3762,
+        14,
+        3
+      ],
+      [
+        820,
+        7,
+        19,
+        3151,
+        3
+      ],
+      [
+        2,
+        3,
+        0,
+        7,
+        3988
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSION12"
+    ],
+    "n_chunks": 20000,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "group_col": "timestamp",
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8427330621736867,
+    "macro_f1_std": 0.024881424454876348,
+    "acc_mean": 0.8448990563540256,
+    "acc_std": 0.04010372855054398,
+    "confusion_matrix": [
+      [
+        2935,
+        8,
+        14,
+        1043,
+        0
+      ],
+      [
+        29,
+        3732,
+        223,
+        14,
+        2
+      ],
+      [
+        19,
+        204,
+        3760,
+        15,
+        2
+      ],
+      [
+        1534,
+        19,
+        15,
+        2413,
+        19
+      ],
+      [
+        5,
+        5,
+        0,
+        0,
+        3990
+      ]
+    ]
+  }
+]

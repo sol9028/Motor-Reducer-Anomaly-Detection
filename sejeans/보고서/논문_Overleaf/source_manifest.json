@@ -1,0 +1,66 @@
+[
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_12ch_베이스라인\\fusion_eval.json",
+    "sha256": "7907b6fccd6785359f37410e1c5b430a84262e937d0a6f06d7e4059cbb037774"
+  },
+  {
+    "path": "본격\\모델\\모델\\eval_results_fuse_rpm.json",
+    "sha256": "eba23928c9fa4213bc68812f1f8ec94b25ac83c62e2338fc6bd967625c8058c0"
+  },
+  {
+    "path": "본격\\모델\\모델\\eval_results_fuse_rpm_temp.json",
+    "sha256": "7974026bf6ad2debe05e628f2e29921cf6471fd03fc23f0df65a57675def3970"
+  },
+  {
+    "path": "본격\\모델\\모델\\eval_results_fuse_rpm_ext_no_band_ratio_7.json",
+    "sha256": "e7fa0d128d90652416e5b17561648bfd38b8be15755e49d1650927df08872c9b"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_ord_A\\eval_results_fuse_rpm_ext.json",
+    "sha256": "6424ea65c7640243bec765c7fd8994197399a8d0ac9bb13c96da91c2209b949f"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_ord_only\\eval_results_ord_only.json",
+    "sha256": "862b898d46e926b3dcc37f4f1cb8aaf28c9c77a70309d625326ae7e32ec115d7"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_ord_C\\eval_results_fuse_rpm_ext_no_band_ratio_7_no_ord_band_ratio_7.json",
+    "sha256": "174fe129169ac3412bdac622a0d2d965be58e5ed4cea6c119492cecf15e6c19e"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_ord_B\\eval_results_fuse_rpm_ext.json",
+    "sha256": "28b3ea8670e9f8de1421c07b537a37178e193fdcc9dfbb3c2bcdcb9bb2fc627c"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_커널스윕\\eval_results_fuse_rpm_ext_ord_k1250.json",
+    "sha256": "189928a6f7554951711fcefe5d4abc6a04719318650c55d11b097d8d26df287a"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_커널스윕\\eval_results_fuse_rpm_ext_ord_k2500.json",
+    "sha256": "d8b40ff0dffc1c0c17840afaa9164ebccaa23347307e9e89bab53bf1e8596ba3"
+  },
+  {
+    "path": "본격\\모델_12ch_베이스라인\\모델_커널스윕\\eval_results_fuse_rpm_ext_ord_k5000.json",
+    "sha256": "28f657dedec6501238c17af036d01574d0113a4d5ce5a364eba756ffbee23240"
+  },
+  {
+    "path": "본격\\모델\\모델\\eval_results_fuse_rpm_gk.json",
+    "sha256": "d8fd6110ab518e1a46d29b517c2f3152fd6bbac257b41be2eb2c647777e8b013"
+  },
+  {
+    "path": "엣지벤치\\result_t1.json",
+    "sha256": "6ac4ec2ddbc48255efd0f15f92048aa509b94d3209a7180acd4710e13344b239"
+  },
+  {
+    "path": "엣지벤치\\result_t4.json",
+    "sha256": "6abc28b13d1e3fae73f4157db1847afa6a3e9cca51cc311fd8d4af313ddd3b51"
+  },
+  {
+    "path": "엣지벤치\\result_t4_b8.json",
+    "sha256": "9caa1e9d353cf38bb2fd8318f95512faf0abe71c5353bbbb7c6c0dce233d1da9"
+  },
+  {
+    "path": "엣지벤치\\result_t1_b32.json",
+    "sha256": "cd5df9675c0345cd8deaee38d2a21892674682b3f34ac671b3a63fe51e019e1e"
+  }
+]

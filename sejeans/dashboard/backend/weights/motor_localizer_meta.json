@@ -1,0 +1,27 @@
+{
+  "class_names": [
+    "DEMAG",
+    "ECC10",
+    "ECC20",
+    "NORMAL",
+    "REDUC"
+  ],
+  "img_size": 224,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "score_targets": {
+    "NORMAL": 0.05,
+    "ECC10": 0.22,
+    "ECC20": 0.38,
+    "DEMAG": 0.5,
+    "REDUC": 0.45
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED87"
+    ],
+    "source": "합성입력",
+    "model_size_mb": 0.69,
+    "n_features": 9996,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 468.0,
+      "single_ms_median": 50.86,
+      "single_ms_p95": 51.7,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 35.44,
+      "chunks_per_sec": 28.2,
+      "breakdown_ms": {
+        "normalize": 0.099,
+        "minirocket": 50.234,
+        "classifier": 0.249
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED87"
+    ],
+    "source": "합성입력",
+    "model_size_mb": 0.69,
+    "n_features": 9996,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 52.6,
+      "single_ms_median": 51.82,
+      "single_ms_p95": 52.91,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 35.59,
+      "chunks_per_sec": 28.1,
+      "breakdown_ms": {
+        "normalize": 0.1,
+        "minirocket": 51.169,
+        "classifier": 0.252
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED87"
+    ],
+    "source": "합성입력",
+    "model_size_mb": 0.69,
+    "n_features": 9996,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 51.2,
+      "single_ms_median": 51.67,
+      "single_ms_p95": 52.56,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 36.98,
+      "chunks_per_sec": 27.0,
+      "breakdown_ms": {
+        "normalize": 0.1,
+        "minirocket": 51.394,
+        "classifier": 0.252
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  }
+]

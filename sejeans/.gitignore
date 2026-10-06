@@ -1,0 +1,17 @@
+# 업로드 제외 (원본 폴더에는 존재)
+.venv/
+.pytest_cache/
+node_modules/
+__pycache__/
+dashboard_streamlit/lib/
+dashboard_streamlit/bin/
+dashboard_streamlit/pyvenv.cfg
+tmp/paper_deps/
+tmp/paper_tools/
+.claude/settings.local.json
+# AI-Hub 원본 데이터 (재배포 불가)
+샘플데이터/Sample/
+샘플데이터/03.합성데이터/
+# 대용량 (GitHub 100MB 제한)
+*.zip
+feature_cache/

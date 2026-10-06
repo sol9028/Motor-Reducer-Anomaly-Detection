@@ -1,0 +1,11 @@
+{
+  "compiler": "Tectonic 0.17.0 (XeTeX)",
+  "pages": 16,
+  "modular_and_standalone_pdf_text_equal": true,
+  "unresolved_citations": 0,
+  "unresolved_references": 0,
+  "overfull_boxes": 0,
+  "missing_glyphs": 0,
+  "layout_review": "All 16 pages reviewed in contact sheets; chart and appendices reviewed at full page size.",
+  "notes": "One underfull hbox warning remains in a justified body paragraph; no clipping. Fontconfig emitted environment warnings but embedded UnBatang/UnDotum fonts rendered correctly."
+}

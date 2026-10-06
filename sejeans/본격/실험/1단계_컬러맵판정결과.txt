@@ -1,0 +1,366 @@
+==============================================================================
+1단계: 스펙트로그램 컬러맵 정체 판정
+==============================================================================
+검사 대상 9개 파일 (센서당 최대 3개)
+
+------------------------------------------------------------------------------
+[A] 파일 실체 점검 (RGBA/알파/비트depth)
+------------------------------------------------------------------------------
+  * 알파가 255 고정이 아니면 RGB로만 읽을 때 색이 왜곡된다.
+  Current_U  PNG RGBA (2000, 1280) alpha min255 max255 (균일 -> 무해)
+  Vib_Motor  PNG RGBA (2000, 1280) alpha min255 max255 (균일 -> 무해)
+  Vib_TM     PNG RGBA (2000, 1280) alpha min255 max255 (균일 -> 무해)
+
+==============================================================================
+[Current_U] 22_07_28_12_15_20_01_zsplit005_001_Current_U.png
+  크기 2000x1280, 고유색 1,256개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      gist_ncar      mean  17.14  median   6.32  within5  47.0%  <== 최적
+      jet            mean  18.26  median   7.02  within5  47.9%
+      nipy_spectral  mean  41.22  median  38.77  within5   2.3%
+      gnuplot2       mean  48.62  median  14.00  within5  44.0%
+      turbo          mean  64.49  median  69.78  within5   0.0%
+      -> 최적 gist_ncar, jet 순위 2위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  18.26  (기준)
+      alpha=0.85 on white    mean  49.75
+      alpha=0.9 on white     mean  35.80
+      alpha=0.95 on white    mean  24.25
+      alpha=0.85 on black    mean  17.06
+      alpha=0.9 on black     mean  16.79
+      alpha=0.95 on black    mean  17.56
+      gamma=0.5              mean  21.49
+      gamma=0.7              mean  19.68
+      gamma=1.4              mean  18.29
+      gamma=2.0              mean  18.30
+      -> 최적 변형: alpha=0.9 on black (mean 16.79)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=  7178  평균잔차   4.97
+      gradient[  5,  20) n=  4630  평균잔차  28.33
+      gradient[ 20,  60) n=  2670  평균잔차  35.45
+      gradient[ 60, inf) n=   522  평균잔차  23.79
+      평탄부 잔차 4.97 / 엣지 잔차 비율 4.78배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+      75.4  0.0  0.0  5.2  6.0  5.6  1.5  1.2  0.7  0.5  0.5  0.5  0.4  0.2  0.8  1.4
+  >> 판정: jet 확정 (잔차=보간노이즈)
+
+==============================================================================
+[Current_U] 22_07_28_17_37_36_01_zsplit003_001_Current_U.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      gist_ncar      mean  17.42  median   4.46  within5  50.4%  <== 최적
+      jet            mean  17.54  median   3.86  within5  51.0%
+      nipy_spectral  mean  42.17  median  38.77  within5   2.6%
+      gnuplot2       mean  51.77  median  12.04  within5  46.5%
+      turbo          mean  63.87  median  70.66  within5   0.0%
+      -> 최적 gist_ncar, jet 순위 2위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  17.54  (기준)
+      alpha=0.85 on white    mean  49.76
+      alpha=0.9 on white     mean  35.96
+      alpha=0.95 on white    mean  24.25
+      alpha=0.85 on black    mean  17.55
+      alpha=0.9 on black     mean  16.84
+      alpha=0.95 on black    mean  17.19
+      gamma=0.5              mean  20.42
+      gamma=0.7              mean  18.92
+      gamma=1.4              mean  17.57
+      gamma=2.0              mean  17.59
+      -> 최적 변형: alpha=0.9 on black (mean 16.84)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=  7438  평균잔차   4.40
+      gradient[  5,  20) n=  3850  평균잔차  29.33
+      gradient[ 20,  60) n=  3032  평균잔차  33.67
+      gradient[ 60, inf) n=   680  평균잔차  22.69
+      평탄부 잔차 4.40 / 엣지 잔차 비율 5.15배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+      71.2  0.0  0.0  5.9  6.1  6.3  1.9  1.3  1.2  1.1  1.2  0.7  0.5  0.4  0.7  1.3
+  >> 판정: jet 확정 (잔차=보간노이즈)
+
+==============================================================================
+[Current_U] 22_09_16_06_24_05_01_zsplit001_001_Current_U.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  23.52  median  12.12  within5  22.7%  <== 최적
+      gist_ncar      mean  29.81  median  19.53  within5  22.4%
+      nipy_spectral  mean  52.66  median  38.77  within5   4.0%
+      turbo          mean  55.39  median  64.49  within5   0.0%
+      gist_rainbow   mean  73.14  median  79.01  within5   4.0%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  23.52  (기준)
+      alpha=0.85 on white    mean  43.06
+      alpha=0.9 on white     mean  32.60
+      alpha=0.95 on white    mean  24.54
+      alpha=0.85 on black    mean  30.44
+      alpha=0.9 on black     mean  26.96
+      alpha=0.95 on black    mean  24.65
+      gamma=0.5              mean  25.59
+      gamma=0.7              mean  24.10
+      gamma=1.4              mean  23.56
+      gamma=2.0              mean  23.60
+      -> 최적 변형: jet 순수 (mean 23.52)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=  2961  평균잔차   8.62
+      gradient[  5,  20) n=  4910  평균잔차  27.97
+      gradient[ 20,  60) n=  5473  평균잔차  27.29
+      gradient[ 60, inf) n=  1656  평균잔차  24.48
+      평탄부 잔차 8.62 / 엣지 잔차 비율 2.84배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+      39.6  0.0  0.0  8.5 11.4 13.7  6.3  5.5  4.8  3.3  2.5  1.1  0.6  0.6  0.8  1.3
+  >> 판정: jet 유력 (보간노이즈 우세)
+
+==============================================================================
+[Vib_Motor] 22_07_28_12_15_20_01_zsplit005_001_Vib_Motor.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  25.13  median  15.13  within5   8.7%  <== 최적
+      gist_ncar      mean  36.83  median  31.01  within5   7.4%
+      turbo          mean  49.32  median  46.60  within5   0.0%
+      gist_rainbow   mean  52.09  median  47.07  within5   5.8%
+      hsv            mean  52.14  median  47.06  within5   5.2%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  25.13  (기준)
+      alpha=0.85 on white    mean  39.06
+      alpha=0.9 on white     mean  30.50
+      alpha=0.95 on white    mean  24.00
+      alpha=0.85 on black    mean  38.02
+      alpha=0.9 on black     mean  31.72
+      alpha=0.95 on black    mean  27.27
+      gamma=0.5              mean  26.05
+      gamma=0.7              mean  25.21
+      gamma=1.4              mean  25.18
+      gamma=2.0              mean  25.23
+      -> 최적 변형: alpha=0.95 on white (mean 24.00)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=   133  평균잔차  23.61
+      gradient[  5,  20) n=  1318  평균잔차  24.37
+      gradient[ 20,  60) n=  4956  평균잔차  24.80
+      gradient[ 60, inf) n=  8593  평균잔차  25.47
+      평탄부 잔차 23.61 / 엣지 잔차 비율 1.08배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+      12.8  0.0  0.0  9.2 17.2 24.1 10.7  8.1  6.0  4.1  3.5  1.6  1.1  0.8  0.6  0.2
+  >> 판정: jet 의심 (평탄부 잔차 큼)
+
+==============================================================================
+[Vib_Motor] 22_07_28_17_37_36_01_zsplit003_001_Vib_Motor.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  18.39  median   8.91  within5   5.3%  <== 최적
+      gist_ncar      mean  42.39  median  35.43  within5   3.7%
+      rainbow        mean  43.49  median  37.14  within5   0.0%
+      turbo          mean  45.93  median  43.40  within5   0.0%
+      gist_rainbow   mean  52.16  median  44.06  within5   2.2%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  18.39  (기준)
+      alpha=0.85 on white    mean  33.16
+      alpha=0.9 on white     mean  24.04
+      alpha=0.95 on white    mean  16.49
+      alpha=0.85 on black    mean  43.50
+      alpha=0.9 on black     mean  32.92
+      alpha=0.95 on black    mean  24.28
+      gamma=0.5              mean  18.78
+      gamma=0.7              mean  18.43
+      gamma=1.4              mean  18.44
+      gamma=2.0              mean  18.49
+      -> 최적 변형: alpha=0.95 on white (mean 16.49)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=    66  평균잔차  13.71
+      gradient[  5,  20) n=   996  평균잔차  13.75
+      gradient[ 20,  60) n=  4322  평균잔차  15.60
+      gradient[ 60, inf) n=  9616  평균잔차  20.16
+      평탄부 잔차 13.71 / 엣지 잔차 비율 1.47배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+       5.0  0.0  0.0  4.4 12.4 30.4 17.9 15.3  7.8  3.4  1.9  0.6  0.3  0.2  0.3  0.1
+  >> 판정: jet 의심 (평탄부 잔차 큼)
+
+==============================================================================
+[Vib_Motor] 22_09_16_06_24_05_01_zsplit001_001_Vib_Motor.png
+  크기 2000x1280, 고유색 1,237개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  17.94  median   8.85  within5   5.1%  <== 최적
+      rainbow        mean  43.06  median  37.14  within5   0.0%
+      gist_ncar      mean  43.50  median  36.30  within5   3.4%
+      turbo          mean  45.50  median  43.15  within5   0.0%
+      gist_rainbow   mean  53.59  median  47.12  within5   2.2%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  17.94  (기준)
+      alpha=0.85 on white    mean  32.59
+      alpha=0.9 on white     mean  23.47
+      alpha=0.95 on white    mean  15.86
+      alpha=0.85 on black    mean  44.00
+      alpha=0.9 on black     mean  33.13
+      alpha=0.95 on black    mean  24.12
+      gamma=0.5              mean  18.30
+      gamma=0.7              mean  17.97
+      gamma=1.4              mean  17.99
+      gamma=2.0              mean  18.04
+      -> 최적 변형: alpha=0.95 on white (mean 15.86)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=    79  평균잔차  11.98
+      gradient[  5,  20) n=   911  평균잔차  12.74
+      gradient[ 20,  60) n=  4165  평균잔차  15.17
+      gradient[ 60, inf) n=  9845  평균잔차  19.64
+      평탄부 잔차 11.98 / 엣지 잔차 비율 1.64배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+       4.6  0.0  0.0  4.5 11.3 29.5 18.5 15.7  9.1  3.4  1.7  0.6  0.3  0.2  0.4  0.0
+  >> 판정: jet 유력 (보간노이즈 우세)
+
+==============================================================================
+[Vib_TM] 22_07_28_12_15_20_01_zsplit005_001_Vib_TM.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  14.80  median   7.58  within5  28.4%  <== 최적
+      gist_ncar      mean  31.22  median  17.55  within5  18.3%
+      gist_rainbow   mean  43.73  median  34.01  within5  25.2%
+      hsv            mean  43.84  median  34.08  within5  23.7%
+      turbo          mean  44.96  median  43.24  within5   0.0%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  14.80  (기준)
+      alpha=0.85 on white    mean  35.41
+      alpha=0.9 on white     mean  25.25
+      alpha=0.95 on white    mean  16.27
+      alpha=0.85 on black    mean  41.11
+      alpha=0.9 on black     mean  30.70
+      alpha=0.95 on black    mean  21.40
+      gamma=0.5              mean  15.23
+      gamma=0.7              mean  14.84
+      gamma=1.4              mean  14.93
+      gamma=2.0              mean  15.05
+      -> 최적 변형: jet 순수 (mean 14.80)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=   183  평균잔차   9.19
+      gradient[  5,  20) n=  1563  평균잔차  11.80
+      gradient[ 20,  60) n=  4567  평균잔차  13.83
+      gradient[ 60, inf) n=  8687  평균잔차  15.97
+      평탄부 잔차 9.19 / 엣지 잔차 비율 1.74배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+       6.0  0.0  0.0  4.5  8.2 14.2  8.0  9.0  8.8  8.3 10.4  7.7  6.0  3.8  4.2  1.1
+  >> 판정: jet 유력 (보간노이즈 우세)
+
+==============================================================================
+[Vib_TM] 22_07_28_17_37_36_01_zsplit003_001_Vib_TM.png
+  크기 2000x1280, 고유색 1,257개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  18.68  median   8.90  within5   5.4%  <== 최적
+      gist_ncar      mean  42.27  median  35.57  within5   3.5%
+      rainbow        mean  43.69  median  37.52  within5   0.0%
+      turbo          mean  45.92  median  43.53  within5   0.0%
+      gist_rainbow   mean  52.20  median  45.11  within5   2.2%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  18.68  (기준)
+      alpha=0.85 on white    mean  33.37
+      alpha=0.9 on white     mean  24.32
+      alpha=0.95 on white    mean  16.80
+      alpha=0.85 on black    mean  43.29
+      alpha=0.9 on black     mean  32.88
+      alpha=0.95 on black    mean  24.39
+      gamma=0.5              mean  19.05
+      gamma=0.7              mean  18.71
+      gamma=1.4              mean  18.73
+      gamma=2.0              mean  18.78
+      -> 최적 변형: alpha=0.95 on white (mean 16.80)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=    84  평균잔차  15.79
+      gradient[  5,  20) n=  1010  평균잔차  13.54
+      gradient[ 20,  60) n=  4261  평균잔차  15.69
+      gradient[ 60, inf) n=  9645  평균잔차  20.56
+      평탄부 잔차 15.79 / 엣지 잔차 비율 1.30배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+       4.7  0.0  0.0  4.8 12.7 30.1 17.8 14.7  8.1  3.8  2.0  0.6  0.3  0.1  0.3  0.1
+  >> 판정: jet 의심 (평탄부 잔차 큼)
+
+==============================================================================
+[Vib_TM] 22_09_16_06_24_05_01_zsplit001_001_Vib_TM.png
+  크기 2000x1280, 고유색 1,251개
+------------------------------------------------------------------------------
+  [B] 후보 컬러맵 거리 (mean/median/within5, 작을수록 일치)
+      jet            mean  21.78  median   9.35  within5  10.2%  <== 최적
+      gist_ncar      mean  36.65  median  30.03  within5   9.6%
+      turbo          mean  47.43  median  44.68  within5   0.0%
+      gist_rainbow   mean  52.90  median  48.07  within5   7.7%
+      hsv            mean  52.96  median  48.05  within5   6.9%
+      -> 최적 jet, jet 순위 1위
+  [C] jet 변형 모델 검정 (순수 jet보다 나은 게 있는가)
+      jet 순수                 mean  21.78  (기준)
+      alpha=0.85 on white    mean  36.52
+      alpha=0.9 on white     mean  27.64
+      alpha=0.95 on white    mean  20.58
+      alpha=0.85 on black    mean  40.21
+      alpha=0.9 on black     mean  32.23
+      alpha=0.95 on black    mean  25.85
+      gamma=0.5              mean  22.55
+      gamma=0.7              mean  21.85
+      gamma=1.4              mean  21.85
+      gamma=2.0              mean  21.91
+      -> 최적 변형: alpha=0.95 on white (mean 20.58)
+  [D] 잔차 구조 분석  << 핵심
+      잔차가 엣지(고gradient)에 몰리면 = 리샘플링/보간 노이즈 -> jet 확정
+      잔차가 균일하면              = 컬러맵 자체가 다름   -> jet 아님
+      gradient[  0,   5) n=   128  평균잔차  19.04
+      gradient[  5,  20) n=  1269  평균잔차  22.06
+      gradient[ 20,  60) n=  4547  평균잔차  22.44
+      gradient[ 60, inf) n=  9056  평균잔차  21.45
+      평탄부 잔차 19.04 / 엣지 잔차 비율 1.13배
+  [E] 복원 스칼라 분포 (16구간 %, 한쪽에 쏠리면 임계설정 주의)
+      10.8  0.0  0.0  7.1 14.3 21.5 10.7  9.8  8.6  6.6  5.1  2.2  1.3  0.9  0.8  0.1
+  >> 판정: jet 의심 (평탄부 잔차 큼)
+
+==============================================================================
+종합 판정
+==============================================================================
+센서          최적맵             jet순위 최적변형                 평탄잔차     엣지비  판정
+Current_U   gist_ncar           2 alpha=0.9 on black     4.97    4.78  jet 확정 (잔차=보간노이즈)
+Current_U   gist_ncar           2 alpha=0.9 on black     4.40    5.15  jet 확정 (잔차=보간노이즈)
+Current_U   jet                 1 jet 순수               8.62    2.84  jet 유력 (보간노이즈 우세)
+Vib_Motor   jet                 1 alpha=0.95 on white    23.61    1.08  jet 의심 (평탄부 잔차 큼)
+Vib_Motor   jet                 1 alpha=0.95 on white    13.71    1.47  jet 의심 (평탄부 잔차 큼)
+Vib_Motor   jet                 1 alpha=0.95 on white    11.98    1.64  jet 유력 (보간노이즈 우세)
+Vib_TM      jet                 1 jet 순수               9.19    1.74  jet 유력 (보간노이즈 우세)
+Vib_TM      jet                 1 alpha=0.95 on white    15.79    1.30  jet 의심 (평탄부 잔차 큼)
+Vib_TM      jet                 1 alpha=0.95 on white    19.04    1.13  jet 의심 (평탄부 잔차 큼)
+
+jet이 최적인 파일: 7/9
+
+해석 가이드
+  1) 'jet 확정/유력'이 대부분 -> 컬러맵은 jet이 맞다.
+     방안1 실패 원인은 역변환이 아니라 '역변환 + 90퍼센타일 임계' 충돌이다.
+     -> 2단계(적응 임계)로 진행. 방안1 폐기하지 말 것.
+  2) 'jet 아님'이 다수 -> 최적맵 컬럼의 컬러맵으로 LUT를 교체해야 한다.
+  3) [C]에서 순수 jet보다 나은 변형이 있으면 그 변형으로 LUT를 만들어야 한다.
+  4) [E] 분포가 저구간에 심하게 쏠려 있으면, 90퍼센타일 임계가 전대역을
+     잡아버리는 지표1 포화의 직접 증거다.
+
+주의: 잔차가 보간노이즈라면 역변환 전 median/bilateral 필터로
+      엣지 노이즈를 줄이면 복원 정확도가 올라간다.
+==============================================================================
+소요 40.1s

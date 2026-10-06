@@ -1,0 +1,290 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED87"
+    ],
+    "n_chunks": 14898,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 504,
+    "n_sessions_per_class": {
+      "DEMAG": 54,
+      "ECC10": 84,
+      "ECC20": 152,
+      "NORMAL": 52,
+      "REDUC": 162
+    },
+    "rpm_only_macro_f1": 0.208,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        2084,
+        6319
+      ],
+      "ECC10": [
+        2997,
+        6207
+      ],
+      "ECC20": [
+        2786,
+        5971
+      ],
+      "NORMAL": [
+        2036,
+        6383
+      ],
+      "REDUC": [
+        1857,
+        4194
+      ]
+    },
+    "min_groups_per_class": 52,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.98614984826227,
+    "macro_f1_std": 0.0008213703595310193,
+    "acc_mean": 0.9861694628418478,
+    "acc_std": 0.000751810096703045,
+    "confusion_matrix": [
+      [
+        3168,
+        0,
+        0,
+        42,
+        0
+      ],
+      [
+        4,
+        2559,
+        45,
+        4,
+        0
+      ],
+      [
+        1,
+        43,
+        2763,
+        0,
+        0
+      ],
+      [
+        63,
+        4,
+        0,
+        3246,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2956
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED87"
+    ],
+    "n_chunks": 14966,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 287,
+    "n_sessions_per_class": {
+      "DEMAG": 57,
+      "ECC10": 52,
+      "ECC20": 58,
+      "NORMAL": 48,
+      "REDUC": 72
+    },
+    "rpm_only_macro_f1": 0.214,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1940,
+        6899
+      ],
+      "ECC10": [
+        3165,
+        6792
+      ],
+      "ECC20": [
+        3094,
+        6693
+      ],
+      "NORMAL": [
+        1887,
+        6549
+      ],
+      "REDUC": [
+        1967,
+        5151
+      ]
+    },
+    "min_groups_per_class": 48,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.9682025874392712,
+    "macro_f1_std": 0.005288739982971086,
+    "acc_mean": 0.9665234110477363,
+    "acc_std": 0.007830924002518851,
+    "confusion_matrix": [
+      [
+        3045,
+        0,
+        4,
+        199,
+        2
+      ],
+      [
+        0,
+        2732,
+        14,
+        3,
+        1
+      ],
+      [
+        3,
+        15,
+        2736,
+        1,
+        0
+      ],
+      [
+        245,
+        4,
+        2,
+        2848,
+        1
+      ],
+      [
+        1,
+        3,
+        0,
+        8,
+        3099
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED87"
+    ],
+    "n_chunks": 16796,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 385,
+    "n_sessions_per_class": {
+      "DEMAG": 125,
+      "ECC10": 58,
+      "ECC20": 58,
+      "NORMAL": 57,
+      "REDUC": 87
+    },
+    "rpm_only_macro_f1": 0.238,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1788,
+        5985
+      ],
+      "ECC10": [
+        3178,
+        6878
+      ],
+      "ECC20": [
+        3044,
+        6585
+      ],
+      "NORMAL": [
+        1794,
+        6494
+      ],
+      "REDUC": [
+        1956,
+        5226
+      ]
+    },
+    "min_groups_per_class": 57,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.9644461582730042,
+    "macro_f1_std": 0.007408553368771994,
+    "acc_mean": 0.9639423481660172,
+    "acc_std": 0.00999788627347881,
+    "confusion_matrix": [
+      [
+        3216,
+        2,
+        0,
+        192,
+        6
+      ],
+      [
+        1,
+        3934,
+        26,
+        0,
+        0
+      ],
+      [
+        2,
+        48,
+        3015,
+        0,
+        0
+      ],
+      [
+        319,
+        1,
+        0,
+        2927,
+        2
+      ],
+      [
+        2,
+        0,
+        0,
+        1,
+        3102
+      ]
+    ]
+  }
+]

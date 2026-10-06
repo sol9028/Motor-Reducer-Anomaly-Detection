@@ -1,0 +1,368 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED87"
+    ],
+    "n_chunks": 14898,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 504,
+    "n_sessions_per_class": {
+      "DEMAG": 54,
+      "ECC10": 84,
+      "ECC20": 152,
+      "NORMAL": 52,
+      "REDUC": 162
+    },
+    "rpm_only_macro_f1": 0.208,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        2084,
+        6319
+      ],
+      "ECC10": [
+        2997,
+        6207
+      ],
+      "ECC20": [
+        2786,
+        5971
+      ],
+      "NORMAL": [
+        2036,
+        6383
+      ],
+      "REDUC": [
+        1857,
+        4194
+      ]
+    },
+    "num_kernels_set": 1250,
+    "n_features": 1176,
+    "min_groups_per_class": 52,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.9785416241591038,
+    "macro_f1_std": 0.0016320107348705678,
+    "acc_mean": 0.9787368003420408,
+    "acc_std": 0.0013202985320875694,
+    "confusion_matrix": [
+      [
+        3135,
+        2,
+        0,
+        73,
+        0
+      ],
+      [
+        2,
+        2541,
+        66,
+        2,
+        1
+      ],
+      [
+        1,
+        79,
+        2727,
+        0,
+        0
+      ],
+      [
+        82,
+        6,
+        1,
+        3224,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        2955
+      ]
+    ],
+    "demag_recall_folds": [
+      0.9743,
+      0.9793,
+      0.9761
+    ],
+    "demag_recall_fold_std": 0.002050049844300827,
+    "model_size_mb": 0.1,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 38.7,
+      "single_ms_median": 26.96,
+      "single_ms_p95": 28.5,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 17.89,
+      "chunks_per_sec": 55.9,
+      "breakdown_ms": {
+        "normalize": 0.097,
+        "minirocket": 26.289,
+        "classifier": 0.164
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED87"
+    ],
+    "n_chunks": 14966,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 287,
+    "n_sessions_per_class": {
+      "DEMAG": 57,
+      "ECC10": 52,
+      "ECC20": 58,
+      "NORMAL": 48,
+      "REDUC": 72
+    },
+    "rpm_only_macro_f1": 0.214,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1940,
+        6899
+      ],
+      "ECC10": [
+        3165,
+        6792
+      ],
+      "ECC20": [
+        3094,
+        6693
+      ],
+      "NORMAL": [
+        1887,
+        6549
+      ],
+      "REDUC": [
+        1967,
+        5151
+      ]
+    },
+    "num_kernels_set": 1250,
+    "n_features": 1176,
+    "min_groups_per_class": 48,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.9501160783799939,
+    "macro_f1_std": 0.0035327680687042454,
+    "acc_mean": 0.9474027841881196,
+    "acc_std": 0.007399551597542765,
+    "confusion_matrix": [
+      [
+        2885,
+        0,
+        3,
+        362,
+        0
+      ],
+      [
+        4,
+        2726,
+        14,
+        6,
+        0
+      ],
+      [
+        2,
+        12,
+        2741,
+        0,
+        0
+      ],
+      [
+        356,
+        1,
+        1,
+        2739,
+        3
+      ],
+      [
+        6,
+        3,
+        0,
+        19,
+        3083
+      ]
+    ],
+    "demag_recall_folds": [
+      0.8423,
+      0.8987,
+      0.9299
+    ],
+    "demag_recall_fold_std": 0.036256516206990295,
+    "model_size_mb": 0.1,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 28.5,
+      "single_ms_median": 26.69,
+      "single_ms_p95": 27.94,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 17.67,
+      "chunks_per_sec": 56.6,
+      "breakdown_ms": {
+        "normalize": 0.101,
+        "minirocket": 26.43,
+        "classifier": 0.164
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED87"
+    ],
+    "n_chunks": 16796,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 385,
+    "n_sessions_per_class": {
+      "DEMAG": 125,
+      "ECC10": 58,
+      "ECC20": 58,
+      "NORMAL": 57,
+      "REDUC": 87
+    },
+    "rpm_only_macro_f1": 0.238,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1788,
+        5985
+      ],
+      "ECC10": [
+        3178,
+        6878
+      ],
+      "ECC20": [
+        3044,
+        6585
+      ],
+      "NORMAL": [
+        1794,
+        6494
+      ],
+      "REDUC": [
+        1956,
+        5226
+      ]
+    },
+    "num_kernels_set": 1250,
+    "n_features": 1176,
+    "min_groups_per_class": 57,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.9475066449441646,
+    "macro_f1_std": 0.0043840748768572396,
+    "acc_mean": 0.9475506721568268,
+    "acc_std": 0.007797229637424097,
+    "confusion_matrix": [
+      [
+        3085,
+        1,
+        1,
+        325,
+        4
+      ],
+      [
+        5,
+        3930,
+        21,
+        4,
+        1
+      ],
+      [
+        7,
+        49,
+        3006,
+        3,
+        0
+      ],
+      [
+        433,
+        7,
+        3,
+        2804,
+        2
+      ],
+      [
+        4,
+        2,
+        0,
+        7,
+        3092
+      ]
+    ],
+    "demag_recall_folds": [
+      0.8907,
+      0.8995,
+      0.917
+    ],
+    "demag_recall_fold_std": 0.010935736957088268,
+    "model_size_mb": 0.1,
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 87,
+      "warmup_ms": 28.8,
+      "single_ms_median": 26.59,
+      "single_ms_p95": 27.41,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 17.64,
+      "chunks_per_sec": 56.7,
+      "breakdown_ms": {
+        "normalize": 0.111,
+        "minirocket": 26.093,
+        "classifier": 0.164
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  }
+]

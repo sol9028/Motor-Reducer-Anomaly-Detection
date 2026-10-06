@@ -1,0 +1,315 @@
+
+--- PAGE 1 ---
+확장특징 실험 결과
+판정: 채택 확정이 맞아. 그것도 논란의 여지 없이. 근거 세 개가 다 넘쳤어:
+성능: DEMAG recall +12~16%p, 판정 기준(+3%p)의 4~5배. macro-F1도 전 차종 0.95+
+비용: 22.7분 — "채널 비례로 3~4시간" 걱정했던 게 완전히 빗나갔어. 12채널이 27분이었으니 채널 4배에 시간은 오히려 비슷.
+경량화 충돌이라는 ④ 최대 리스크가 소멸한 거야
+안정성: 폴드 편차 ±0.002~0.011로 작고, timestamp CV(엄격 프로토콜)에서 나온 수
+모터-감속기 이상탐지 — 실험 정리 (v2 데이터 · A1~A4)
+기간: 2026-07-31 ~ 08-07 · 작업 폴더: C:\Users\jaesung\Desktop\매녀졸프
+원칙: 한 번에 하나만 변경, CV 그룹은 timestamp(주행 단위)로 통일, 판정은 비율(recall 등) 기준
+1. 데이터 준비 — 특징추출 v2
+모터_특징추출_v2.py 로 스펙트로그램 PNG → 시계열 특징 Parquet 재추출.
+기존 추출기 대비 확정 변경 3건 + 확장특징:
+변경
+이유
+검증 결과 ( 추출결과_검증.py )
+① LUT 역변환
+채널 RMS는 jet 컬러맵에서 에너지와 단조관계가 아님
+rms 고유값 2,682개, 0비율 0% — 통과
+② rownorm
+전역 임계값 탓에 band_start 80~95%가 상수 0 (정보량 0)
+band_start=0 비율 94.6% → 최대 1.1% — 통과
+③ rpm 부착
+split 단위로 speed가 변함 (세션 단위 부착은 오류)
+채움율 100%, group 내 split별 변동 확인 — 통과
+확장특징 실험 결과
+1
+
+
+--- PAGE 2 ---
+변경
+이유
+검증 결과 ( 추출결과_검증.py )
+④ 확장특징 12개
+DEMAG는 에너지 재분배 고장인데 기존 4특징은 재분배를 못 담음
+band_ratio 합=1.0, NaN 0 — 정상
+산출: parquet 38,160개 (22.3GB), 12,720세션 × 3센서 완비, 센서 간 행수 100% 일치
+유일한 주의: band_ratio_7 의 float16 0비율 5.91% (언더플로우 의심) → 4-c에서 분리 검증
+2. 공통 학습 방법 (모든 실험 동일)
+모터_학습_v3.py — 3차 발표의 early fusion 방식 유지:
+세션의 3센서(Current_U, Vib_Motor, Vib_TM)를 채널로 스택 → chunk 2000행
+클래스당 캡 4,000청크 (세션 균등 추출) → 채널 표준화 → MiniRocketMultivariate(10,000커널) 1회 변환
+StratifiedGroupKFold 3-fold (폴드마다 LogisticRegression만 재학습) → 전체 재학습 저장
+차종당 모델 1개 (IONIQ / KONA / NIRO), 5클래스 (DEMAG, ECC10, ECC20, NORMAL, REDUC)
+CV 그룹 = timestamp: 같은 주행(timestamp)의 zsplit들이 train/test로 갈리는 누수 차단
+진단 내장: rpm단독 F1(지름길 검사), 클래스당 세션 수, DEMAG-NORMAL 혼동
+3. 실험 결과 요약
+단계
+구성
+CV 그룹
+macro-F1
+(IONIQ/KONA/NIRO)
+평균
+소요
+결론
+1단계
+12ch (기존 4특
+징)
+timestamp
+0.896 / 0.884 /
+0.843
+0.874
+27.1분
+베이스라인
+2단계
+15ch (+rpm)
+group_key
+0.889 / 0.893 /
+0.881
+0.888
+—
+누수 크기 측정용
+A1 (3단계)
+15ch (+rpm)
+timestamp
+0.888 / 0.884 /
+0.872
+0.881
+—
+rpm 효과 차종별
+엇갈림
+A2
+temp 분포 체크
+—
+—
+—
+1분
+안전 (구간 분리
+없음)
+A3
+18ch
+(+temperature)
+timestamp
+0.883 / 0.867 /
+0.869
+0.873
+21.4분
+기각 (전 차종 하
+락)
+A4
+51ch (+확장특징
+12)
+timestamp
+0.978 / 0.954 /
+0.959
+0.964
+22.7분
+채택 확정
+4-c
+48ch
+(band_ratio_7
+제외)
+timestamp
+0.981 / 0.956 /
+0.959
+0.965
+25.6분
+51ch와 동급~미
+세 우위
+DEMAG recall (핵심 과제: DEMAG↔NORMAL 혼동)
+단계
+IONIQ
+KONA
+NIRO
+1단계 (12ch)
+0.820
+0.802
+0.734
+A1 (15ch)
+0.813
+0.759
+0.770
+A3 (18ch)
+0.798
+0.739
+0.766
+A4 (51ch)
+0.971
+0.883
+0.928
+4-c (48ch)
+0.974
+0.903
+0.927
+4. 비교쌍 해석 (통제 변인별)
+① rpm 순수 효과 (1단계 vs A1 — 둘 다 timestamp, rpm만 차이)
+NIRO만 뚜렷한 이득(+0.029, DEMAG recall +3.6%p), IONIQ 소폭 하락, KONA는 DEMAG recall −4.3%p.
+→ 차종별 엇갈림. rpm단독 F1은 0.208~0.238로 지름길(컨닝)은 아님 — 보조 정보로 작동.
+② zsplit 누수 크기 (2단계 vs A1 — 둘 다 15ch, CV 단위만 차이)
+macro-F1 평균 0.888 → 0.881 (−0.007). 누수 부풀림은 작지만 KONA DEMAG recall은 −5.0%p.
+확장특징 실험 결과
+2
+
+
+--- PAGE 3 ---
+→ 구 발표(group_key) 수치와 timestamp 수치는 직접 비교 불가함을 확인.
+③ temperature (A1 vs A3 — temp 채널만 추가)
+A2 분포 체크: 클래스 간 p10~p90 구간 겹침 최소 54~64%로 분리 없음(안전), 단 REDUC만 중앙값 4~8°C 낮음.
+A3 결과: 전 차종 macro-F1·DEMAG recall 하락 (평균 −0.008, recall −0.4~−2.0%p). temp단독 F1 0.213~0.279 (<0.4).
+→ 기각. 지름길도 아니고 도움도 안 되는 노이즈 채널. 15ch 유지 후 A4 진행.
+④ 확장특징 12개 (A1 vs A4 — 확장특징만 추가, 청크 수 동일해 정확한 비교)
+macro-F1 +0.070~+0.090, DEMAG recall +12.4~+15.8%p (판정 기준 +3%p를 크게 초과), 소요 22.7분으로 부담 없음.
+→ 채택 확정 (사용자 판정). "DEMAG는 에너지 재분배 고장 → 대역비율로 재분배를 직접 표현"이라는 설계 의도가 검증됨.
+⑤ band_ratio_7 언더플로우 영향 (A4 vs 4-c — band_ratio_7만 제외)
+48ch가 전 지표에서 동급 또는 미세 우위: macro-F1 평균 0.964→0.965, DEMAG recall IONIQ +0.3%p / KONA +2.0%p /
+NIRO −0.1%p.
+→ band_ratio_7(최고주파 대역, float16 언더플로우 5.91%)은 기여가 없고 KONA에서는 오히려 해로움.
+→ 최종 구성을 51ch로 갈지 48ch로 갈지 결정 필요 (아래 §6).
+5. 최종 모델 혼동행렬 — A4 51ch (3-fold 누적 CV, 행=실제/열=예측)
+IONIQ — macro-F1 0.978 ± 0.002
+P:DEMAG
+P:ECC10
+P:ECC20
+P:NORMAL
+P:REDUC
+T:DEMAG
+3118
+1
+0
+91
+0
+T:ECC10
+4
+2550
+58
+0
+0
+T:ECC20
+1
+43
+2760
+0
+3
+T:NORMAL
+128
+1
+2
+3181
+1
+T:REDUC
+0
+0
+0
+2
+2954
+KONA — macro-F1 0.954 ± 0.011
+P:DEMAG
+P:ECC10
+P:ECC20
+P:NORMAL
+P:REDUC
+T:DEMAG
+2871
+0
+3
+372
+4
+T:ECC10
+3
+2723
+24
+0
+0
+T:ECC20
+2
+17
+2736
+0
+0
+T:NORMAL
+290
+3
+4
+2803
+0
+T:REDUC
+6
+11
+0
+2
+3092
+NIRO — macro-F1 0.959 ± 0.006
+P:DEMAG
+P:ECC10
+P:ECC20
+P:NORMAL
+P:REDUC
+T:DEMAG
+3169
+4
+1
+241
+1
+T:ECC10
+0
+3935
+23
+2
+1
+T:ECC20
+3
+72
+2990
+0
+0
+T:NORMAL
+340
+4
+2
+2903
+0
+T:REDUC
+1
+0
+0
+0
+3104
+세 차종 모두 남은 오류가 사실상 DEMAG↔NORMAL 한 경계에 집중. REDUC recall ≈ 1.0, ECC10↔ECC20 혼동 미미.
+6. 결론 및 남은 결정
+확정: v2 추출 + early fusion(MiniRocket+LR) + CV 그룹 timestamp + 확장특징 채택. temperature 기각.
+남은 결정 1 — 51ch vs 48ch: 4-c 결과 48ch(band_ratio_7 제외)가 동급~미세 우위(특히 KONA DEMAG recall +2.0%p)
+이고 채널도 줄어 경량. 51ch 유지 근거는 "이미 채택 확정한 구성"이라는 점뿐.
+참고: 구 발표 수치(0.83~0.87)와의 직접 비교는 금지 (추출기·CV 단위가 다름). 발표에서는 "동일 프로토콜(timestamp CV)
+에서 12ch 0.874 → 51ch 0.964" 흐름으로 제시.
+7. 산출물 위치
+확장특징 실험 결과
+3
+
+
+--- PAGE 4 ---
+파일
+내용
+특징데이터\ + 샘플인덱스.parquet
+v2 추출 결과 (38,160 parquet, 22.3GB)
+추출결과_검증리포트.txt
+추출 검증 리포트 (전 항목 통과)
+모터_학습_v3.py
+학습 스크립트 ( --temp , --ext , --drop , --group-by 옵션)
+모델\학습리포트_fuse_rpm.txt / _gk.txt
+A1 (15ch·ts) / 2단계 (15ch·gk) 리포트
+모델\학습리포트_fuse_rpm_temp.txt
+A3 (18ch) 리포트
+모델\학습리포트_fuse_rpm_ext.txt
+A4 (51ch, 채택) 리포트
+모델\학습리포트_fuse_rpm_ext_no_band_ratio_7.txt
+4-c (48ch) 리포트
+모델\model_registry_*.joblib / eval_results_*.json
+학습된 모델 / 평가 원본(혼동행렬 포함)
+모델_12ch_베이스라인\
+1단계 (12ch) 모델·평가
+학습로그_A3_18ch.txt , 학습로그_A4_51ch.txt , 학습로그_A4c_48ch.txt
+실행 로그
+확장특징 실험 결과
+4

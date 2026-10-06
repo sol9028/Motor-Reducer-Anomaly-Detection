@@ -1,0 +1,74 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED81"
+    ],
+    "source": "실데이터 32청크",
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 81,
+      "warmup_ms": 532.1,
+      "single_ms_median": 49.14,
+      "single_ms_p95": 50.63,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 33.37,
+      "chunks_per_sec": 30.0,
+      "breakdown_ms": {
+        "normalize": 0.114,
+        "minirocket": 47.587,
+        "classifier": 0.252
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED81"
+    ],
+    "source": "실데이터 32청크",
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 81,
+      "warmup_ms": 49.6,
+      "single_ms_median": 49.25,
+      "single_ms_p95": 50.1,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 33.29,
+      "chunks_per_sec": 30.0,
+      "breakdown_ms": {
+        "normalize": 0.135,
+        "minirocket": 47.916,
+        "classifier": 0.265
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED81"
+    ],
+    "source": "실데이터 32청크",
+    "inference": {
+      "chunk_rows": 2000,
+      "n_channels": 81,
+      "warmup_ms": 51.0,
+      "single_ms_median": 48.68,
+      "single_ms_p95": 49.36,
+      "batch_size": 32,
+      "batch_ms_per_chunk": 33.35,
+      "chunks_per_sec": 30.0,
+      "breakdown_ms": {
+        "normalize": 0.116,
+        "minirocket": 47.721,
+        "classifier": 0.265
+      },
+      "n_jobs": -1,
+      "n_cpu": 16
+    }
+  }
+]

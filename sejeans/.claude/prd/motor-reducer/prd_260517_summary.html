@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>모터 감속기 파일럿 PRD 요약 — 7조</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: #f5f7fa;
+    color: #1a2332;
+    line-height: 1.6;
+    padding: 32px 24px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    color: white;
+    padding: 36px 40px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 24px rgba(30, 58, 95, 0.15);
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+  }
+  .header .meta {
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e6ecf3;
+  }
+  .section-title .num {
+    background: #2c5282;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  /* Cards */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  .card {
+    background: #f8fafc;
+    border-left: 4px solid #2c5282;
+    padding: 16px 18px;
+    border-radius: 8px;
+  }
+  .card.danger { border-left-color: #e53e3e; background: #fff5f5; }
+  .card.success { border-left-color: #38a169; background: #f0fff4; }
+  .card.warning { border-left-color: #d69e2e; background: #fffbeb; }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1e3a5f;
+    margin-bottom: 6px;
+  }
+  .card-body {
+    font-size: 13px;
+    color: #475569;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  th {
+    background: #2c5282;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  th:first-child { border-top-left-radius: 6px; }
+  th:last-child { border-top-right-radius: 6px; }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e6ecf3;
+  }
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #e6f0fa; }
+  td.center, th.center { text-align: center; }
+
+  /* Pipeline */
+  .pipeline {
+    background: #1a2332;
+    color: #cbd5e0;
+    padding: 24px 28px;
+    border-radius: 10px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .pipeline .stage { color: #63b3ed; font-weight: 700; }
+  .pipeline .arrow { color: #f6ad55; }
+  .pipeline .note { color: #a0aec0; font-style: italic; }
+  .pipeline .key { color: #68d391; }
+
+  /* Highlight box */
+  .highlight {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+    border-left: 5px solid #d69e2e;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .highlight strong { color: #744210; }
+
+  .blocker {
+    background: #fff5f5;
+    border-left: 5px solid #e53e3e;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .blocker strong { color: #c53030; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .tag-pilot { background: #fef3c7; color: #92400e; }
+  .tag-main { background: #dbeafe; color: #1e40af; }
+  .tag-ok { background: #d1fae5; color: #065f46; }
+  .tag-fail { background: #fecaca; color: #991b1b; }
+
+  /* Two-col comparison */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .col-box {
+    border: 2px solid #e6ecf3;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .col-box.pilot { border-color: #d69e2e; background: #fffbeb; }
+  .col-box.main { border-color: #2c5282; background: #ebf4ff; }
+  .col-box h4 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-box ul { list-style: none; font-size: 12.5px; }
+  .col-box li {
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+  .col-box li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #2c5282;
+  }
+  .col-box.pilot li:before { color: #d69e2e; }
+
+  /* PSC cards */
+  .psc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .psc-card {
+    background: #f0fff4;
+    border: 2px solid #9ae6b4;
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+  .psc-id {
+    font-weight: 700;
+    color: #22543d;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .psc-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: #1a2332;
+    margin-bottom: 4px;
+  }
+  .psc-desc {
+    font-size: 11.5px;
+    color: #4a5568;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-box {
+    background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .stat-num { font-size: 26px; font-weight: 700; }
+  .stat-label { font-size: 11px; opacity: 0.85; margin-top: 4px; letter-spacing: 0.5px; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    padding: 20px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .section { box-shadow: none; page-break-inside: avoid; }
+    .header { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">PILOT / FEASIBILITY STUDY</div>
+    <h1>모터 감속기 시계열 분류 파이프라인</h1>
+    <div class="subtitle">파일럿 단계 PRD 요약 — 샘플 81 CSV 기반 동작 검증</div>
+    <div class="meta">
+      <span>7조 박세진(C321027) · 박솔</span>
+      <span>홍익대 시스템분석/설계</span>
+      <span>2026-05-17 · v1.2</span>
+    </div>
+  </div>
+
+  <!-- KPI Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-num">81</div>
+      <div class="stat-label">SAMPLE CSV</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">~225</div>
+      <div class="stat-label">CHUNKS (size=2000)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3</div>
+      <div class="stat-label">센서별 모델</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">6</div>
+      <div class="stat-label">SUCCESS CRITERIA</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 문제 정의 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">1</span>
+      문제 정의 — 직전 PRD의 Blocker
+    </div>
+    <p style="font-size:14px; color:#475569; margin-bottom:14px;">
+      직전 v1.0 PRD는 <strong>9개 (차종 × 센서) 슬롯 × StratifiedGroupKFold(3-fold)</strong> 가정 위에서 작성되었으나, 실측 결과 group 수가 절대 부족함.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>model_key</th>
+          <th class="center">DEMAG</th>
+          <th class="center">ECC10</th>
+          <th class="center">ECC20</th>
+          <th class="center">NORMAL</th>
+          <th class="center">REDUC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>IONIQ × 3센서</td><td class="center">1</td><td class="center">1</td><td class="center">2</td><td class="center">1</td><td class="center">4</td></tr>
+        <tr><td>KONA × 3센서</td><td class="center" style="background:#fecaca; font-weight:700;">1 ⚠</td><td class="center">2</td><td class="center" style="background:#fecaca; font-weight:700;">1 ⚠</td><td class="center">2</td><td class="center">2</td></tr>
+        <tr><td>NIRO × 3센서</td><td class="center">1</td><td class="center">3</td><td class="center">3</td><td class="center">1</td><td class="center">2</td></tr>
+      </tbody>
+    </table>
+
+    <div class="blocker">
+      <strong>즉시 실패:</strong> KONA-{DEMAG, ECC20}처럼 group 수 = 1인 클래스는 <code>StratifiedGroupKFold(n_splits=3)</code>에서 <code>ValueError</code>로 학습 자체 불가.<br>
+      <strong>근본 원인:</strong> 샘플 81 CSV는 group-level stratified CV에 구조적으로 부적합 → 알고리즘 튜닝으로 해소 불가.
+    </div>
+  </div>
+
+  <!-- SECTION 2: 해결 전략 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">2</span>
+      해결 전략 — 파일럿 단순화
+    </div>
+
+    <div class="highlight">
+      <strong>"파일럿은 동작 검증, 성능은 본 데이터에서"</strong> 원칙 채택
+    </div>
+
+    <div class="grid-3" style="margin-top:16px;">
+      <div class="card success">
+        <div class="card-title">① 센서별 모델 3개</div>
+        <div class="card-body">Current_U / Vib_Motor / Vib_TM 분리 학습. <strong>차종은 합쳐서</strong> latent 변수 처리.</div>
+      </div>
+      <div class="card success">
+        <div class="card-title">② Hold-out Split</div>
+        <div class="card-body"><code>GroupShuffleSplit(n_splits=1, test_size=0.2, seed=42)</code> · stratification 포기, group 누수만 차단.</div>
+      </div>
+      <div class="card success">
+        <div class="card-title">③ MiniROCKET + Ridge 유지</div>
+        <div class="card-body">sktime <code>MiniRocket(kernels=10000)</code> + <code>RidgeClassifierCV(balanced)</code>. 도메인 설계 승계.</div>
+      </div>
+      <div class="card success">
+        <div class="card-title">④ chunk_size=2000</div>
+        <div class="card-body">가변 길이 CSV를 chunk로 분할, 부모 CSV의 chunk는 동일 group_key 상속.</div>
+      </div>
+      <div class="card success">
+        <div class="card-title">⑤ 단일 컬럼 'rms' 고정</div>
+        <div class="card-body">36-grid search는 본 데이터 단계로 이전. 코드만 동작 검증.</div>
+      </div>
+      <div class="card success">
+        <div class="card-title">⑥ 대시보드 스캐폴딩</div>
+        <div class="card-body">FastAPI + Vite/TS/Tailwind 최소 화면 · 라벨/점수/model_key 표시.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h3 style="font-size:15px; color:#1e3a5f; margin-bottom:10px;">결정 근거</h3>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">센서 분리 (필수)</div>
+          <div class="card-body">전류(Current_U) ≠ 진동(Vib_Motor/TM). 물리량·단위·스펙트럼 모두 달라 단일 모델 통합 시 Ridge 결정 경계 왜곡.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">차종 비분리 (파일럿 한정)</div>
+          <div class="card-body">차종 × 클래스당 group=1~4. 차종 합치면 Current_U 예시: DEMAG=3 / ECC10=6 / ECC20=6 / NORMAL=4 / REDUC=8 → min≥3로 안정.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 단계 비교 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">3</span>
+      파일럿 vs 본 데이터 단계
+    </div>
+
+    <div class="comparison">
+      <div class="col-box pilot">
+        <h4><span class="tag tag-pilot">PILOT</span> 본 PRD</h4>
+        <ul>
+          <li>샘플 81 CSV (chunk ≈ 225)</li>
+          <li><strong>센서별 모델 3개</strong> (차종 비분리)</li>
+          <li>GroupShuffleSplit 단일 hold-out</li>
+          <li>rms 단일 컬럼 고정</li>
+          <li>성능 정량 목표 <strong>없음</strong></li>
+          <li>NFR 측정 코드만 보유</li>
+          <li>v2.0 PNG 벤치마크 미수행</li>
+        </ul>
+      </div>
+      <div class="col-box main">
+        <h4><span class="tag tag-main">MAIN</span> 후속 단계</h4>
+        <ul>
+          <li>550,800 샘플 (600GB)</li>
+          <li><strong>(차종 × 센서) 9개 모델</strong> 분리</li>
+          <li>StratifiedGroupKFold(n_splits≥3)</li>
+          <li>4 컬럼 × 9 슬롯 = 36-grid</li>
+          <li>Acc ≥ 0.90 · Macro-F1 ≥ 0.85</li>
+          <li>≤ 100ms 추론 · ≤ 200MB 디스크</li>
+          <li>splits.json 해시 공유 협의</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 아키텍처 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">4</span>
+      시스템 아키텍처
+    </div>
+    <div class="pipeline">
+<span class="stage">[원천]</span> 81 CSV (가변 길이 2000~10000) <span class="note">// {차종}/{고장}/{날짜}/{센서}/*.csv</span>
+    <span class="arrow">↓</span> path_indexer + csv_loader
+<span class="stage">[Sample Index]</span> artifacts/sample_index.parquet
+    <span class="arrow">↓</span> chunker(chunk_size=<span class="key">2000</span>)
+<span class="stage">[Chunk Index]</span> N ≈ 225 · 부모 CSV별 group_key 상속
+    <span class="arrow">↓</span> sensor 필터 <span class="note">(Current_U / Vib_Motor / Vib_TM 각각, 차종 합산)</span>
+<span class="stage">[Per-sensor Chunk]</span> ×3 · 센서별 부모 CSV 27개, chunk ≈ 75개
+    <span class="arrow">↓</span> GroupShuffleSplit(n_splits=1, test_size=<span class="key">0.2</span>, seed=<span class="key">42</span>) ×3
+<span class="stage">[Splits]</span> splits_{sensor}.json ×3 · <span class="key">assert_no_group_leakage()</span>
+    <span class="arrow">↓</span> NaN handler + select_column('rms') + panel_formatter
+<span class="stage">[Panel]</span> (N, 1, 2000) float32
+    <span class="arrow">↓</span> MiniRocket(num_kernels=<span class="key">10000</span>) ×3 독립 인스턴스
+<span class="stage">[Features]</span> (N, ~10000)
+    <span class="arrow">↓</span> RidgeClassifierCV(class_weight='balanced') ×3 독립 학습
+<span class="stage">[Models]</span> pilot_current_u.joblib · pilot_vib_motor.joblib · pilot_vib_tm.joblib
+    <span class="arrow">↓</span> ModelRegistry + Dispatcher: <span class="key">predict(signal, sensor_name)</span>
+<span class="stage">[Inference]</span> CSV → sensor 메타 추출 → 라우팅 → label + scores + latency
+    <span class="arrow">↓</span> FastAPI 백엔드
+<span class="stage">[Dashboard]</span> Vite + TS + Tailwind <span class="note">// 라벨·점수·model_key·메타 표시</span>
+    </div>
+  </div>
+
+  <!-- SECTION 5: 성공 기준 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">5</span>
+      Pilot Success Criteria (PSC)
+    </div>
+    <p style="font-size:13px; color:#475569; margin-bottom:14px;">
+      파일럿 단계는 <strong>성능 정량 목표 없음</strong>. 아래 6개 항목 모두 충족 시 파일럿 완료.
+    </p>
+
+    <div class="psc-grid">
+      <div class="psc-card">
+        <div class="psc-id">PSC-01</div>
+        <div class="psc-title">End-to-end 동작</div>
+        <div class="psc-desc">로드 → 전처리 → 학습 → 추론 → 대시보드 단일 명령 실행, 예외 없이 완료</div>
+      </div>
+      <div class="psc-card">
+        <div class="psc-id">PSC-02</div>
+        <div class="psc-title">모델 저장/로드</div>
+        <div class="psc-desc">joblib 저장 후 신규 세션 로드 → 동일 입력 → 라벨/점수 100% 일치</div>
+      </div>
+      <div class="psc-card">
+        <div class="psc-id">PSC-03</div>
+        <div class="psc-title">엣지 배포 형태</div>
+        <div class="psc-desc">joblib 단일 산출물 + requirements.txt 잠금 → clean install 후 추론 성공</div>
+      </div>
+      <div class="psc-card">
+        <div class="psc-id">PSC-04</div>
+        <div class="psc-title">Latency 측정</div>
+        <div class="psc-desc">measure_inference_latency()가 mean/p50/p95/p99 + 환경 메타 numeric 반환</div>
+      </div>
+      <div class="psc-card">
+        <div class="psc-id">PSC-05</div>
+        <div class="psc-title">Group 누수 차단</div>
+        <div class="psc-desc">train/val의 group_key 교집합 검사 함수 존재 + 호출 + 교집합 ∅ assertion</div>
+      </div>
+      <div class="psc-card">
+        <div class="psc-id">PSC-06</div>
+        <div class="psc-title">스키마 호환</div>
+        <div class="psc-desc">splits.json · config.json · registry_manifest.json 본 데이터 단계 스키마 검증</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: 기대효과 & 리스크 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">6</span>
+      기대 효과 & 주요 리스크
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size:14px; color:#22543d; margin-bottom:10px;">✅ 기대 효과</h3>
+        <div class="card success" style="margin-bottom:8px;">
+          <div class="card-body"><strong>블로커 해소</strong> — StratifiedGroupKFold ValueError 우회로 파이프라인 끝까지 실행</div>
+        </div>
+        <div class="card success" style="margin-bottom:8px;">
+          <div class="card-body"><strong>코드 자산화</strong> — chunker·NaN·panel·MiniROCKET·Registry·Router·Dashboard 본 데이터 단계 그대로 이전</div>
+        </div>
+        <div class="card success" style="margin-bottom:8px;">
+          <div class="card-body"><strong>누수 차단 사전 검증</strong> — GroupShuffleSplit + assertion 코드가 KFold 교체 후에도 유효</div>
+        </div>
+        <div class="card success">
+          <div class="card-body"><strong>학기말 발표 서사</strong> — "feasibility 검증 완료 + 본 데이터 계획"의 명확한 학술 톤</div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:14px; color:#c53030; margin-bottom:10px;">⚠ 주요 리스크</h3>
+        <div class="card danger" style="margin-bottom:8px;">
+          <div class="card-title">차종 신호 차이 흡수 실패</div>
+          <div class="card-body">→ 성능 평가 대상 아님 명시, 본 데이터 단계 9-모델 분리 복귀</div>
+        </div>
+        <div class="card danger" style="margin-bottom:8px;">
+          <div class="card-title">센서별 group 분포 불균형</div>
+          <div class="card-body">→ split 사후 검증, 5클래스 ≥ 1 샘플 충족까지 시드 회전(최대 10회)</div>
+        </div>
+        <div class="card danger" style="margin-bottom:8px;">
+          <div class="card-title">단일 hold-out 평가 편향</div>
+          <div class="card-body">→ 성능 평가가 목표 아님 명시, 코드 동작만 검증</div>
+        </div>
+        <div class="card danger">
+          <div class="card-title">chunk_size=2000 가정 변경</div>
+          <div class="card-body">→ configs/preprocess.yaml 외부화, 본 데이터 첫 sweep에서 재선정</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: 전환 조건 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">7</span>
+      본 데이터 단계 전환 조건 (Exit Criteria)
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:60px;">#</th>
+          <th>전환 조건</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="center"><strong>1</strong></td><td>본 데이터 600GB 적재 완료 (스토리지 · I/O 확보)</td></tr>
+        <tr><td class="center"><strong>2</strong></td><td>파일럿 PSC-01 ~ PSC-06 6개 항목 <strong>전부 통과</strong></td></tr>
+        <tr><td class="center"><strong>3</strong></td><td>모든 인터페이스 스키마(splits.json · config.json · registry_manifest.json) 본 데이터 호환</td></tr>
+        <tr><td class="center"><strong>4</strong></td><td>본 데이터 단계 PRD(직전 3건) 전수 재검토 · Deprecation 노트 제거</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px; color:#1e3a5f; margin:20px 0 10px;">전환 시 변경 항목</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-body">
+          <code>GroupShuffleSplit(1)</code> → <code>StratifiedGroupKFold(3+)</code>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          센서별 3개 모델 → (차종 × 센서) <strong>9개 모델 분리</strong>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          dispatcher 키: <code>registry[sensor]</code> → <code>registry[(vehicle, sensor)]</code>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          단일 'rms' 컬럼 → 4 컬럼 grid search (36회 학습)
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <strong>성능 정량 목표 활성화</strong> — Acc ≥ 0.90, Macro-F1 ≥ 0.85
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <strong>NFR 정량 검증 활성화</strong> — ≤ 100ms, ≤ 200MB
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: 기술 스택 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">8</span>
+      기술 스택
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="card-title">데이터</div><div class="card-body">pandas · numpy</div></div>
+      <div class="card"><div class="card-title">시계열 변환</div><div class="card-body">sktime (MiniRocket)</div></div>
+      <div class="card"><div class="card-title">분류기</div><div class="card-body">scikit-learn (RidgeClassifierCV, GroupShuffleSplit)</div></div>
+      <div class="card"><div class="card-title">직렬화</div><div class="card-body">joblib (zlib 압축)</div></div>
+      <div class="card"><div class="card-title">백엔드</div><div class="card-body">FastAPI + uvicorn</div></div>
+      <div class="card"><div class="card-title">프론트엔드</div><div class="card-body">Vite + TypeScript + Tailwind CSS</div></div>
+      <div class="card"><div class="card-title">테스트</div><div class="card-body">pytest</div></div>
+      <div class="card"><div class="card-title">로깅</div><div class="card-body">logging (stdlib)</div></div>
+      <div class="card"><div class="card-title">개발 환경</div><div class="card-body">Jupyter Notebook · Python 3.10+</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    PRD v1.2 · 2026-05-17 · 7조 박세진(C321027) · 박솔 · 홍익대 시스템분석/설계
+  </div>
+
+</div>
+</body>
+</html>

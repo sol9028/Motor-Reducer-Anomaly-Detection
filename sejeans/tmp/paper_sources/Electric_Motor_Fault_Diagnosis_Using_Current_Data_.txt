@@ -1,0 +1,165 @@
+
+--- PAGE 1 ---
+ 
+ 
+전류 데이터 이미지화 및 반지도학습을 이용한  
+전동기 고장 진단 
+ 
+정원호*† · 임윤섭* · 정성진* · 박용화* 
+*한국과학기술원 기계공학과 
+ 
+ Electric Motor Fault Diagnosis Using Current Data Imaging and Semi-
+Supervised Learning 
+Wonho Jung*†, Yoon-Seop Lim*, Sungjin Cheong* and Yong-Hwa Park* 
+* Dept. of Mechanical Eng., Korea Inst. of Sci. and Tech. 
+1.  서 론 
+전동기 주요 고장 모드인 고정자 권선 결함은 전
+동기의 토크 불균형을 일으켜 전동기 전력에 영향
+을 미친다(1). 따라서 적절한 시기에 제대로 된 유
+지보수가 되지 않으면 고장자 권선 결함은 빠르게 
+전파되어 영구자석 전동기의 자기 소거 및 전력 
+손실이 일어난다(2). 전동기 고정자 권선 결함은 
+(1) 같은 상의 권선 단락, (2) 같은 상의 코일 간 
+단락, (3) 두 상의 단락 그리고 (4) 접지와 상과
+의 단락으로 총 4 가지 유형으로 분류된다(3). 그 
+중에서도 같은 상의 권선 단락은 전동기에서 감지
+하기 가장 어려운 결함으로 알려져 있다. 
+전동기 고장 진단을 위해서는 고장을 잘 대변하는 
+특성인자가 필요하다. 하지만 전동기에서 수집되
+는 데이터들은 외부 환경이나 작동 조건으로 인해 
+노이즈가 섞이는 경우가 많다. 따라서, 본 연구는 
+전동기 전류데이터 이미지화와 딥러닝을 이용하여 
+실제 현장에서 강건하게 동작할 수 있는 전동기 
+고장 진단법을 개발하고자 한다. 
+2.  제안된 방법 
+2.1 전류데이터 이미지화 
+시계열 데이터는 시간 순서에 따른 일련의 데이터 
+값으로 구성되어 있어 공학시스템 고장 진단 측면
+에서 유의미한 정보를 많이 가지고 있다. 
+본 논문은 위상 영역을 통해 시계열 데이터의 주
+기성과 변화율에 대한 다양한 패턴을 변환해줄 수 
+있는 수정된 Recurrence Plot (RP)를 제안한다. 수
+정된 RP 는 시계열 데이터의 주기적, 에너지 특성
+을 반영하면서 노이즈에 강건하게 동작한다. 
+ 
+p
+( )
+( )
+( , )
+( )
+( )
+otherwise
+N
+x i
+x j
+N
+R i j
+x i
+x j
+
+−
+
+
+= 
+−
+
+ 
+여기서 i 와 j 는 각각 시계열 데이터 포인트 번호
+이고 x 는 각 데이터 포인트의 값을 나타낸다. N
+은 미리 정의된 임계값 (N>0)이고 Rp 는 변환된 
+RP 행렬을 의미한다. 
+ 
+2.2 마할라노비스 거리를 이용한 건전성 지표 
+마할라노비스 거리 (Mahalanobis distance)는 데이터 
+분포 간의 거리를 나타내는 척도를 의미한다. 따
+라서 마할라노비스 거리는 정상 분포와 이상 특성
+인자 사이의 거리를 측정하여 이상 감지에 활용될 
+수 있다. 본 논문은 학습된 컨볼루션 신경망에서 
+마지막 컨볼루션 층에서의 활성값을 특성인자로 
+활용한다. 추출된 RP 이미지의 활성값 분포는 결
+함 심각도가 커짐에 따라 정상 분포에서 점차 멀
+어지는 경향을 보여준다. 따라서, 이 추세를 시각
+화하기 위해 마할라노비스 거리를 이용하여 전동
+기 건전성을 판단한다. 
+3.  사례 연구 
+제안된 방법을 검증하기 위해, Fig 1 와 같은 모터
+테스트베드를 구성하였다. 제안된 테스트베드는 
+권선 단락을 모사할 수 있으며, Fig 2 과 같이 권선 
+단락 결함 심각도 별로 전류데이터를 수집하였다. 
+그 결과, 제안된 이미지화 기법을 이용하면 전류
+데이터가 결함 심각도에 따라, 패턴이 변화됨을 
+Fig 3 를 통해 확인할 수 있다. 또한, 딥러닝과 마
+할라노비스 거리를 이용한 건전성 지표를 통해 
+Fig 4 처럼 정상과 결함이 심각도별로 구분이 됨
+을 확인할 수 있다.  
+ 
+† Presenting Author, wonho1456@kaist.ac.kr 
+KSME_DC22_Thu_18
+-59-
+
+
+--- PAGE 2 ---
+ 
+ 
+ 
+ 
+Fig. 1 Description of electric motor testbed 
+ 
+ 
+             (a)                  (b) 
+ 
+(c)                  (d) 
+Fig. 2 Current signal from motor testbed: (a) normal, (b) 
+fault 1 (low severity), (c) fault 2 (medium severity), and 
+(d) fault 3 (high severity) 
+ 
+   
+ 
+(a)                    (b) 
+   
+ 
+(c)                    (d) 
+Fig. 3 Proposed imaging method: (a) normal, (b) fault 1 
+(low severity), (c) fault 2 (medium severity), and (d) 
+fault 3 (high severity) 
+ 
+Mahalanobis distance
+0
+15
+30
+45
+60
+Normal
+Fault 1
+Fault 2
+Fault 3
+ 
+Fig. 4 Proposed health index 
+ 
+4.  결 론 
+이 논문은 전동기 전류데이터를 이용하여 전동기 
+고장 진단 방법을 제시한다. 제안된 시계열 데이
+터 이미지화 방법은 시계열 데이터의 모든 관련 
+동적 정보를 포함할뿐만 아니라 데이터 노이즈에 
+대해 강력하게 작동한다. 그리고 딥러닝과 마할라
+노비스 거리를 이용하여 정상 활성값 분포로부터 
+떨어진 거리를 측정하여, 전동기 결함 심각도에 
+따라 전동기의 건전성을 식별하였다. 
+후 기 
+이 연구는 2022 년도 정부(과학기술정보통신부)의 
+재원으로 수행된 미래 지하도시 연구사업임. 
+참고문헌 
+(1) Wei, Z., 2014, "A Review of Permanent Magnet 
+Synchronous Motor Fault Diagnosis," in Proceedings 
+of IEEE Conference and Expo Transportation 
+Electrification Asia-Pacific, pp. 1-5. 
+(2) Bellini, A., Filippetti, F., Tassoni, C., and Capolino, 
+G., 2008, "Advances in Diagnostic Techniques for 
+Induction Machines," IEEE Transactions on Industrial 
+Electronics, Vol. 55, No. 12, pp. 4109-4126. 
+(3) Ukil, A., Chen, S., and Andenna, A., 2011, "Detection 
+of Stator Short Circuit Faults in Three-Phase Induction 
+Motors Using Motor Current Zero Crossing Instants," 
+Electric Power Systems Research, Vol. 81, No. 4, pp. 
+1036-1044. 
+-60-

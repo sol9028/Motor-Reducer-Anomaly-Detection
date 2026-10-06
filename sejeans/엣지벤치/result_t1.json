@@ -1,0 +1,102 @@
+{
+  "env": {
+    "timestamp": "2026-08-23T20:04:23",
+    "python": "3.13.5",
+    "platform": "Linux-6.18.39+rpt-rpi-v8-aarch64-with-glibc2.41",
+    "machine": "aarch64",
+    "cpu_count": 4,
+    "threads_requested": 1,
+    "numpy": "2.4.6",
+    "sklearn": "1.7.2",
+    "sktime": "1.1.0",
+    "numba": "0.67.0",
+    "joblib": "1.5.3",
+    "board": "Raspberry Pi 4 Model B Rev 1.1"
+  },
+  "thermal_before": {
+    "temp": "37.4'C",
+    "throttled": "0x0",
+    "arm_mhz": 1500
+  },
+  "thermal_after": {
+    "temp": "39.4'C",
+    "throttled": "0x0",
+    "arm_mhz": 1500
+  },
+  "model_load_seconds": 0.25,
+  "rss_mb_after_load": 193.3,
+  "rows": [
+    {
+      "model": "model_registry_fuse_rpm_ext_ord_k1250::IONIQ_FUSED87",
+      "n_channels": 87,
+      "batch": 1,
+      "reps": 30,
+      "jit_warmup_s": 1.69,
+      "total_ms_mean": 226.83,
+      "total_ms_p50": 226.92,
+      "total_ms_p95": 229.09,
+      "total_ms_p99": 229.13,
+      "total_ms_max": 229.14,
+      "per_chunk_ms_p50": 226.92,
+      "throughput_chunks_per_s": 4.41,
+      "pre_ms_p50": 1.364,
+      "minirocket_ms_p50": 224.49,
+      "clf_ms_p50": 1.044,
+      "threads": 1
+    },
+    {
+      "model": "model_registry_fuse_rpm_ext_ord_k2500::IONIQ_FUSED87",
+      "n_channels": 87,
+      "batch": 1,
+      "reps": 30,
+      "jit_warmup_s": 1.24,
+      "total_ms_mean": 412.18,
+      "total_ms_p50": 411.96,
+      "total_ms_p95": 413.66,
+      "total_ms_p99": 414.89,
+      "total_ms_max": 415.23,
+      "per_chunk_ms_p50": 411.96,
+      "throughput_chunks_per_s": 2.43,
+      "pre_ms_p50": 1.357,
+      "minirocket_ms_p50": 409.44,
+      "clf_ms_p50": 1.132,
+      "threads": 1
+    },
+    {
+      "model": "model_registry_fuse_rpm_ext_ord_k5000::IONIQ_FUSED87",
+      "n_channels": 87,
+      "batch": 1,
+      "reps": 30,
+      "jit_warmup_s": 1.35,
+      "total_ms_mean": 446.83,
+      "total_ms_p50": 446.62,
+      "total_ms_p95": 448.5,
+      "total_ms_p99": 448.6,
+      "total_ms_max": 448.64,
+      "per_chunk_ms_p50": 446.62,
+      "throughput_chunks_per_s": 2.24,
+      "pre_ms_p50": 1.337,
+      "minirocket_ms_p50": 444.01,
+      "clf_ms_p50": 1.269,
+      "threads": 1
+    },
+    {
+      "model": "model_registry_ord_B_87ch_k10000::IONIQ_FUSED87",
+      "n_channels": 87,
+      "batch": 1,
+      "reps": 30,
+      "jit_warmup_s": 1.37,
+      "total_ms_mean": 455.15,
+      "total_ms_p50": 455.04,
+      "total_ms_p95": 455.95,
+      "total_ms_p99": 457.3,
+      "total_ms_max": 457.78,
+      "per_chunk_ms_p50": 455.04,
+      "throughput_chunks_per_s": 2.2,
+      "pre_ms_p50": 1.351,
+      "minirocket_ms_p50": 452.08,
+      "clf_ms_p50": 1.568,
+      "threads": 1
+    }
+  ]
+}

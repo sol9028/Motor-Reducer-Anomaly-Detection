@@ -1,0 +1,17 @@
+# 이 두 개만 고정하면 된다. 나머지는 pip 이 알아서 맞춘다.
+#
+# sktime 1.1.0  : 이 버전이 아니면 모델 로드가 실패한다
+#     ModuleNotFoundError: No module named 'sktime.transformations.rocket'
+#     (구버전은 rocket 이 sktime.transformations.panel.rocket 에 있었다)
+# sklearn 1.7.2 : 모델을 저장할 때 쓴 버전
+#
+# numpy 는 절대 고정하지 말 것.
+#   sktime 1.1.0 이 numpy<2.5 로 제약하므로 알아서 2.4.x 가 깔린다.
+#   numpy==1.26.4 로 고정하면 Python 3.13 에 cp313 휠이 없어 소스 빌드로 넘어가고,
+#   빌드에 성공해도 scipy(numpy>=2.0 요구)와 충돌해 sklearn import 가 깨진다.
+#   모델은 numpy 1.26.4 로 저장됐지만 numpy 2.x 가 1.x 피클을 읽을 수 있어 문제없다.
+#   (numpy 2.4.6 + sklearn 1.7.2 + sktime 1.1.0 조합으로 로드·추론 검증 완료)
+sktime==1.1.0
+scikit-learn==1.7.2
+numba
+joblib

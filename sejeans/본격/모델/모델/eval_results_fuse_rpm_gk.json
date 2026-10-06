@@ -1,0 +1,290 @@
+[
+  {
+    "slot": [
+      "IONIQ",
+      "FUSED15"
+    ],
+    "n_chunks": 10542,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 3576,
+    "n_sessions_per_class": {
+      "DEMAG": 414,
+      "ECC10": 559,
+      "ECC20": 837,
+      "NORMAL": 449,
+      "REDUC": 1317
+    },
+    "rpm_only_macro_f1": 0.223,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1915,
+        6038
+      ],
+      "ECC10": [
+        2933,
+        6013
+      ],
+      "ECC20": [
+        2773,
+        5682
+      ],
+      "NORMAL": [
+        1876,
+        5961
+      ],
+      "REDUC": [
+        1815,
+        4000
+      ]
+    },
+    "min_groups_per_class": 414,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8892834028503919,
+    "macro_f1_std": 0.001334712499614667,
+    "acc_mean": 0.8981342998660912,
+    "acc_std": 0.001507651643305535,
+    "confusion_matrix": [
+      [
+        1561,
+        7,
+        0,
+        350,
+        3
+      ],
+      [
+        7,
+        1717,
+        97,
+        22,
+        7
+      ],
+      [
+        4,
+        127,
+        2017,
+        2,
+        5
+      ],
+      [
+        398,
+        18,
+        6,
+        1482,
+        3
+      ],
+      [
+        1,
+        2,
+        7,
+        8,
+        2691
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "KONA",
+      "FUSED15"
+    ],
+    "n_chunks": 9074,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 2096,
+    "n_sessions_per_class": {
+      "DEMAG": 408,
+      "ECC10": 343,
+      "ECC20": 388,
+      "NORMAL": 382,
+      "REDUC": 575
+    },
+    "rpm_only_macro_f1": 0.242,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1809,
+        6590
+      ],
+      "ECC10": [
+        3043,
+        6572
+      ],
+      "ECC20": [
+        2995,
+        6548
+      ],
+      "NORMAL": [
+        1768,
+        6214
+      ],
+      "REDUC": [
+        1853,
+        4919
+      ]
+    },
+    "min_groups_per_class": 343,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8926171435069143,
+    "macro_f1_std": 0.0030472505226806007,
+    "acc_mean": 0.8955993275725286,
+    "acc_std": 0.0033782943975847026,
+    "confusion_matrix": [
+      [
+        1486,
+        2,
+        4,
+        345,
+        0
+      ],
+      [
+        9,
+        1595,
+        92,
+        12,
+        4
+      ],
+      [
+        4,
+        85,
+        1667,
+        2,
+        0
+      ],
+      [
+        361,
+        6,
+        10,
+        1341,
+        0
+      ],
+      [
+        1,
+        8,
+        0,
+        3,
+        2037
+      ]
+    ]
+  },
+  {
+    "slot": [
+      "NIRO",
+      "FUSED15"
+    ],
+    "n_chunks": 12156,
+    "classes": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "n_sessions": 2425,
+    "n_sessions_per_class": {
+      "DEMAG": 487,
+      "ECC10": 345,
+      "ECC20": 469,
+      "NORMAL": 379,
+      "REDUC": 745
+    },
+    "rpm_only_macro_f1": 0.237,
+    "rpm_range_by_class": {
+      "DEMAG": [
+        1699,
+        5678
+      ],
+      "ECC10": [
+        3178,
+        6878
+      ],
+      "ECC20": [
+        2988,
+        6220
+      ],
+      "NORMAL": [
+        1681,
+        6114
+      ],
+      "REDUC": [
+        1857,
+        4809
+      ]
+    },
+    "min_groups_per_class": 345,
+    "status": "ok",
+    "n_splits": 3,
+    "labels": [
+      "DEMAG",
+      "ECC10",
+      "ECC20",
+      "NORMAL",
+      "REDUC"
+    ],
+    "macro_f1_mean": 0.8813951072504119,
+    "macro_f1_std": 0.004327922029800983,
+    "acc_mean": 0.8996776218583843,
+    "acc_std": 0.004795339059081965,
+    "confusion_matrix": [
+      [
+        1730,
+        5,
+        9,
+        439,
+        0
+      ],
+      [
+        11,
+        3838,
+        104,
+        6,
+        2
+      ],
+      [
+        8,
+        120,
+        1836,
+        7,
+        4
+      ],
+      [
+        473,
+        10,
+        6,
+        1252,
+        2
+      ],
+      [
+        5,
+        7,
+        0,
+        0,
+        2282
+      ]
+    ]
+  }
+]
